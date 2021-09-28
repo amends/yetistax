@@ -26,7 +26,7 @@ import { useRouter } from 'next/router'
 import { ethers } from "ethers";
 import useMyMiners from "../hooks/useMyMiners";
 import useFPS from "../hooks/useFPS";
-import useAvailBalance from "../hooks/useAvailBalance"
+import useBAL from "../hooks/useAvailBalance"
 function Home() {
   
   const { account, library } = useWeb3React();
