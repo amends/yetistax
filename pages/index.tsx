@@ -19,17 +19,69 @@ import {
 } from "@chakra-ui/react"
 import { useState } from "react";
 import useTokenBalance from "../hooks/useTokenBalance";
+import useMinter from "../hooks/useMinter"
+import useTokenContract from "../hooks/useTokenContract";
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { hexlify } from "@ethersproject/bytes";
+import { toAscii } from "ethjs-util";
+import { BigNumber, BigNumberish, ethers } from "ethers";
+import useMyMiners from "../hooks/useMyMiners";
 
 function Home() {
   
   const { account, library } = useWeb3React();
-
   const triedToEagerConnect = useEagerConnect();
   const [CAKE, setCAKE] = useState('');
   const [miners, setMiners] = useState('');
   const balCAKE = useTokenBalance(account, "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
-  console.log(balCAKE)
+  const cakeContract = useTokenContract("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82")
+  const miner = useMinter()
   const isConnected = typeof account === "string" && !!library;
+  const router = useRouter()
+  const myMiners = useMyMiners(account)
+console.log(myMiners.data)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.href;
+      const split = hostname.split("=")
+      const ref = split[1]
+   }
+  })
+
+
+  async function approveCAKE(amount: any) {
+    console.log(amount)
+    const approve = await cakeContract.approve("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", amount)
+  }
+  async function investCAKE(amount: any){
+    const hostname = window.location.href;
+      let ref
+      const split = hostname.split("=")
+      var data = split[1]
+      if(data && data.length > 10){
+         ref = data
+      } else {
+         ref = account
+      }
+      console.log(ref)
+    const invest = await miner.investCake(ref, amount)
+  }
+  async function compoundCAKE(){
+    const hostname = window.location.href;
+      let ref
+      const split = hostname.split("=")
+      var data = split[1]
+      if(data && data.length > 10){
+         ref = data
+      } else {
+         ref = account
+      }
+    const compound = await miner.compoundCake(ref)
+  }
+  async function sellCAKE(){
+    const pop = await miner.sellCake()
+  }
 
   return (
     <Box bg="#89CFF0" minW="100vw" minH="100vh">
@@ -64,7 +116,7 @@ function Home() {
               <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
               <Text color="gray.500" p={1}>available CAKE</Text>
               </HStack>
-              <Button colorScheme="blue">Approve CAKE Spend</Button>
+              <Button onClick={() => approveCAKE(ethers.utils.parseEther(CAKE))}colorScheme="blue">Approve CAKE Spend</Button>
             </VStack>
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
@@ -75,18 +127,18 @@ function Home() {
               <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
               <Text color="gray.500" p={1}>available CAKE</Text>
               </HStack>
-              <Button colorScheme="blue">Hire Miners</Button>
+              <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Miners</Button>
             </VStack>
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
           <VStack p={5}>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Miners</Text>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Miners</Text>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Feet Per Second</Text>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Mined CAKE</Text>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Until Full</Text>
               <HStack>
-            <Button colorScheme="blue">Hire More Miners</Button>
-            <Button colorScheme="blue">Pocket CAKE</Button>
+            <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Miners</Button>
+            <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket CAKE</Button>
             </HStack>
             </VStack>
     
