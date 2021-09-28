@@ -27,6 +27,7 @@ import { ethers } from "ethers";
 import useMyMiners from "../hooks/useMyMiners";
 import useFPS from "../hooks/useFPS";
 import useBAL from "../hooks/useAvailBalance"
+import useCountdown from "../hooks/useCountdown";
 function Home() {
   
   const { account, library } = useWeb3React();
@@ -41,7 +42,8 @@ function Home() {
   const myMiners = useMyMiners(account)
   const FPS = useFPS(account)
   const BAL = useBAL(account)
-console.log(myMiners.data)
+  const date = useCountdown(account);
+  
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.href;
@@ -52,7 +54,6 @@ console.log(myMiners.data)
 
 
   async function approveCAKE(amount: any) {
-    console.log(amount)
     const approve = await cakeContract.approve("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", amount)
   }
   async function investCAKE(amount: any){
@@ -134,10 +135,9 @@ console.log(myMiners.data)
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
           <VStack p={5}>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Miners</Text>
-            <!--
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> --->
+              {/* <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> */}
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Mined CAKE</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Until Full</Text>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">You will be full on {date.data}</Text>
               <HStack>
             <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Miners</Button>
             <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket CAKE</Button>
