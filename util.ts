@@ -22,11 +22,11 @@ export function formatEtherscanLink(
   switch (type) {
     case "Account": {
       const [chainId, address] = data;
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/address/${address}`;
+      return `https://bscscan.com/address/${address}`;
     }
     case "Transaction": {
       const [chainId, hash] = data;
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/tx/${hash}`;
+      return `https://bscscan.com/tx/${hash}`;
     }
   }
 }

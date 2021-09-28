@@ -2,12 +2,12 @@ import useSWR from "swr";
 import type { ERC20 } from "../contracts/types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import useTokenContract from "./useTokenContract";
+import { parseBalance } from "../util";
 
 function getTokenBalance(contract: ERC20) {
   return async (_: string, address: string) => {
     const balance = await contract.balanceOf(address);
-
-    return balance;
+    return parseBalance(balance.toNumber(), 18, 6);
   };
 }
 
