@@ -26,6 +26,7 @@ import { useRouter } from 'next/router'
 import { ethers } from "ethers";
 import useMyMiners from "../hooks/useMyMiners";
 import useFPS from "../hooks/useFPS";
+import useAvailBalance from "../hooks/useAvailBalance"
 function Home() {
   
   const { account, library } = useWeb3React();
@@ -39,6 +40,7 @@ function Home() {
   const router = useRouter()
   const myMiners = useMyMiners(account)
   const FPS = useFPS(account)
+  const BAL = useBAL(account)
 console.log(myMiners.data)
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -132,8 +134,9 @@ console.log(myMiners.data)
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
           <VStack p={5}>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Miners</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Mined CAKE</Text>
+            <!--
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> --->
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Mined CAKE</Text>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">0 Until Full</Text>
               <HStack>
             <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Miners</Button>
