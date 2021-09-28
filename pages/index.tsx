@@ -23,9 +23,7 @@ import useMinter from "../hooks/useMinter"
 import useTokenContract from "../hooks/useTokenContract";
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { hexlify } from "@ethersproject/bytes";
-import { toAscii } from "ethjs-util";
-import { BigNumber, BigNumberish, ethers } from "ethers";
+import { ethers } from "ethers";
 import useMyMiners from "../hooks/useMyMiners";
 
 function Home() {
