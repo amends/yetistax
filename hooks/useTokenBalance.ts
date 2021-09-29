@@ -7,9 +7,12 @@ import { parseBalance } from "../util";
 function getTokenBalance(contract: ERC20) {
   return async (_: string, address: string) => {
     const balance = await contract.balanceOf(address);
+    if(Number(balance) < 1000000000000){
+      return parseBalance(balance, 18, 6);
+    } else {
     const roundedDown = (Number(balance) - 1000000000000)
     return parseBalance(BigInt(roundedDown), 18, 6);
-  };
+  }};
 }
 
 export default function useTokenBalance(
