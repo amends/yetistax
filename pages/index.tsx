@@ -148,7 +148,7 @@ function Home() {
               <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of CAKE" />
               <HStack>
               {isConnected ? <>
-              <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
+              <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
               <Text color="gray.500" p={1}>available CAKE</Text></> :
               <Spinner mb={3} color="blue.500" />
               }
