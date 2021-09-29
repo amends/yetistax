@@ -2,11 +2,12 @@ import useSWR from "swr";
 import type { ERC20 } from "../contracts/types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import useMinter from "./useMinter";
+import { parseBalance } from "../util";
 
 function getBAL(contract: any, address: any) {
   return async (_: string, address: string) => {
     const bal = await contract.getCakeSinceCakeBake(address);
-    return bal.toNumber();
+    return parseBalance(bal.toNumber(), 18, 6)
   };
 }
 

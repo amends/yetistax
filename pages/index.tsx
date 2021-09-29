@@ -28,6 +28,8 @@ import useMyMiners from "../hooks/useMyMiners";
 import useFPS from "../hooks/useFPS";
 import useBAL from "../hooks/useAvailBalance"
 import useCountdown from "../hooks/useCountdown";
+import useCakeApproval from "../hooks/useCakeApproval";
+var isLoading = false;
 function Home() {
   
   const { account, library } = useWeb3React();
@@ -42,8 +44,9 @@ function Home() {
   const myMiners = useMyMiners(account)
   const FPS = useFPS(account)
   const BAL = useBAL(account)
-  const date = useCountdown(account);
-  
+  const date = useCountdown(account)
+  const isCakeApproved = useCakeApproval("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", account);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.href;
@@ -54,6 +57,7 @@ function Home() {
 
 
   async function approveCAKE(amount: any) {
+    isLoading = true;
     const approve = await cakeContract.approve("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", amount)
   }
   async function investCAKE(amount: any){
@@ -95,8 +99,8 @@ function Home() {
           <Center pt={5}>
           <Button colorScheme="blue"><Account triedToEagerConnect={triedToEagerConnect} /></Button>
           </Center>
-          <SimpleGrid column={4} spacing={5} justifyItems="center" >
-          <Box borderRadius="30px" mt="2em" boxShadow="lg" bg="white" alignItems="center" width="90vw">
+          <SimpleGrid column={5} spacing={5} justifyItems="center">
+          <Box borderRadius="30px" mt="2em" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
             <HStack>
             <Img maxW="100px" maxH="100px" p="1em" src="/cake.png" />
             <Heading color="gray.500" p={5}>CakeStax CAKE Minter</Heading>
@@ -110,7 +114,7 @@ function Home() {
             </Center>
           </Box>
         
-          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
+          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" p={1}>1. Enter CAKE Amount Below and Approve Spend</Text>
               <Input onChange={event => setCAKE(event.target.value)} value={CAKE} placeholder="Amount of CAKE" />
@@ -118,10 +122,13 @@ function Home() {
               <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
               <Text color="gray.500" p={1}>available CAKE</Text>
               </HStack>
-              <Button onClick={() => approveCAKE(ethers.utils.parseEther(CAKE))}colorScheme="blue">Approve CAKE Spend</Button>
+              {!isCakeApproved.data ? 
+              <Button isLoading={isLoading} onClick={() => approveCAKE(ethers.utils.parseEther(CAKE))}colorScheme="blue">Approve CAKE Spend</Button> :
+              <Button isLoading={false} onClick={() => approveCAKE(ethers.utils.parseEther(CAKE))}colorScheme="blue">Approve Additional CAKE Spend</Button>
+              }
             </VStack>
           </Center>
-          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
+          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" p={1}>2. Enter CAKE Amount Below and Hire Miners</Text>
               <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of CAKE" />
@@ -132,7 +139,7 @@ function Home() {
               <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Miners</Button>
             </VStack>
           </Center>
-          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width="90vw">
+          <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Miners</Text>
               {/* <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> */}
