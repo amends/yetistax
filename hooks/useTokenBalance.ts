@@ -7,7 +7,7 @@ import { parseBalance } from "../util";
 function getTokenBalance(contract: ERC20) {
   return async (_: string, address: string) => {
     const balance = await contract.balanceOf(address);
-    return parseBalance(balance.toNumber(), 18, 6);
+    return parseBalance(balance, 18, 6);
   };
 }
 
