@@ -49,8 +49,7 @@ function Home() {
   const date = useCountdown(account)
   const isCakeApproved = useCakeApproval("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", account);
   const cakeBal = useCakeBaking();
-  console.log(BAL)
-
+  const correctBal = Number(BAL.data) * 0.95
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.href;
@@ -162,7 +161,7 @@ function Home() {
           <VStack p={5}>
               {isConnected ? <>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Bunnies</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Baked CAKE</Text>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{correctBal} Baked CAKE</Text>
               <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on:<br/> {date.data}</Text></> :
               <Spinner mb={3} color="blue.500" />
               }
