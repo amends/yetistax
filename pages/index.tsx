@@ -162,7 +162,7 @@ function Home() {
               {isConnected ? <>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Bunnies</Text>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Baked CAKE</Text>
-              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on<br/> {date.data}</Text></> :
+              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on:<br/> {date.data}</Text></> :
               <Spinner mb={3} color="blue.500" />
               }
             <SimpleGrid columns={{base:1, md:2}} spacing={3}>

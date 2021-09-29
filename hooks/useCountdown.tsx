@@ -3,15 +3,20 @@ import type { ERC20 } from "../contracts/types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import useMinter from "./useMinter";
 import { parseBalance } from "../util";
+import { ethers } from "ethers";
 
 function getCountdown(contract: any, address: any) {
   return async (_: string, address: string) => {
     const currentTime = await contract.cakeBake(address);
+    if (currentTime != 0){
     const addTime = currentTime.toNumber() + 86400
     const ms = addTime * 1000
     const date = new Date(ms)
     const formattedDate = date.toLocaleString(); 
     return formattedDate;
+    } else {
+    return "Wait, you haven't hired any bunnies!";
+    }
   };
 }
 
