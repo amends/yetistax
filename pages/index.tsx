@@ -162,6 +162,13 @@ function Home() {
             </VStack>
     
           </Center>
+          <Center mb={5} borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
+          <VStack p={5}>
+              <Text color="gray.500" fontSize="md" fontWeight="semibold">Use your referral link to earn free Bunnies!</Text>
+              <Link href={`https://cakestax.money?ref=${account}`}><Text color="gray.500" fontSize="10px" fontWeight="semibold">https://cakestax.money?ref={account}</Text></Link>
+            </VStack>
+    
+          </Center>
           </SimpleGrid>
           
        </>
