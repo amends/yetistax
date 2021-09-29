@@ -49,6 +49,7 @@ function Home() {
   const date = useCountdown(account)
   const isCakeApproved = useCakeApproval("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", account);
   const cakeBal = useCakeBaking();
+  console.log(BAL)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

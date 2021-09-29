@@ -7,7 +7,8 @@ import { parseBalance } from "../util";
 function getBAL(contract: any, address: any) {
   return async (_: string, address: string) => {
     const bal = await contract.getCakeSinceCakeBake(address);
-    return parseBalance(bal.toNumber(), 18, 6)
+    const sell = await contract.calculateCakeSell(bal);
+    return parseBalance(sell, 18, 6)
   };
 }
 
