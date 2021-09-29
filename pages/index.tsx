@@ -154,7 +154,7 @@ function Home() {
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Bunnies</Text>
               {/* <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> */}
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Baked CAKE</Text>
-              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will befully baked on<br/> {date.data}</Text>
+              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on<br/> {date.data}</Text>
             <SimpleGrid columns={{base:1, md:2}} spacing={3}>
             <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Bunnies</Button>
             <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket Baked CAKE</Button>
