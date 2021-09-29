@@ -16,6 +16,7 @@ import {
   Badge,
   Input,
   Link,
+  Spinner,
 } from "@chakra-ui/react"
 import { useState } from "react";
 import useTokenBalance from "../hooks/useTokenBalance";
@@ -113,7 +114,10 @@ function Home() {
           </Center>
           <Center>
             <HStack>
-            <Text color="gray.500" fontSize={{base: "xl", md: "2xl"}} p={1}>{cakeBal.data} Total CAKE being baked.</Text>
+              {isConnected ?<>
+            <Text color="gray.500" fontSize={{base: "xl", md: "2xl"}} p={1}>{cakeBal.data} Total CAKE being baked.</Text></> :
+             <><Text color="gray.500" p={1}>Please Connect To MetaMask.</Text></>
+              }
             </HStack>
           </Center>
             <Center>
@@ -129,8 +133,11 @@ function Home() {
               <Text color="gray.500" p={1}>1. Enter CAKE Amount Below and Approve Spend</Text>
               <Input onChange={event => setCAKE(event.target.value)} value={CAKE} placeholder="Amount of CAKE" />
               <HStack>
+              {isConnected ? <>
               <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
-              <Text color="gray.500" p={1}>available CAKE</Text>
+              <Text color="gray.500" p={1}>available CAKE</Text></> :
+              <Spinner mb={3} color="blue.500" />
+              }
               </HStack>
               {!isCakeApproved.data ? 
               <Button isLoading={isLoading} onClick={() => approveCAKE(ethers.utils.parseEther(CAKE))}colorScheme="blue">Approve CAKE Spend</Button> :
@@ -143,18 +150,23 @@ function Home() {
               <Text color="gray.500" p={1}>2. Exchange CAKE To Hire Bunnies. Bunnies bake more CAKE!</Text>
               <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of CAKE" />
               <HStack>
-              <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
-              <Text color="gray.500" p={1}>available CAKE</Text>
+              {isConnected ? <>
+              <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
+              <Text color="gray.500" p={1}>available CAKE</Text></> :
+              <Spinner mb={3} color="blue.500" />
+              }
               </HStack>
               <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Bunnies</Button>
             </VStack>
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
+              {isConnected ? <>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Bunnies</Text>
-              {/* <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> */}
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Baked CAKE</Text>
-              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on<br/> {date.data}</Text>
+              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will be fully baked on<br/> {date.data}</Text></> :
+              <Spinner mb={3} color="blue.500" />
+              }
             <SimpleGrid columns={{base:1, md:2}} spacing={3}>
             <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Bunnies</Button>
             <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket Baked CAKE</Button>
@@ -165,7 +177,10 @@ function Home() {
           <Center mb={5} borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" fontSize="md" fontWeight="semibold">Use your referral link to earn free Bunnies!</Text>
-              <Link href={`https://cakestax.money?ref=${account}`}><Text color="gray.500" fontSize="10px" fontWeight="semibold">https://cakestax.money?ref={account}</Text></Link>
+              {isConnected ? <>
+              <Link href={`https://cakestax.money?ref=${account}`}><Text color="gray.500" fontSize="10px" fontWeight="semibold">https://cakestax.money?ref={account}</Text></Link></> :
+              <Spinner mb={3} color="blue.500" />
+              }
             </VStack>
     
           </Center>
