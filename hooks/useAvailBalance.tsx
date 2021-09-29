@@ -9,7 +9,8 @@ function getBAL(contract: any, address: any) {
   return async (_: string, address: string) => {
     const bal = await contract.getCakeSinceCakeBake(address);
     const sell = await contract.calculateCakeSell(bal);
-    return parseBalance(sell, 18, 6)
+    const final = (Number(sell) * 0.95).toFixed(0)
+    return parseBalance(BigInt(final), 18, 6)
   };
 }
 
