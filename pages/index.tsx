@@ -29,6 +29,7 @@ import useFPS from "../hooks/useFPS";
 import useBAL from "../hooks/useAvailBalance"
 import useCountdown from "../hooks/useCountdown";
 import useCakeApproval from "../hooks/useCakeApproval";
+import useCakeBaking from "../hooks/useCakeBaking";
 var isLoading = false;
 function Home() {
   
@@ -46,6 +47,8 @@ function Home() {
   const BAL = useBAL(account)
   const date = useCountdown(account)
   const isCakeApproved = useCakeApproval("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", account);
+  const cakeBal = useCakeBaking();
+  console.log(cakeBal)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -101,11 +104,18 @@ function Home() {
           </Center>
           <SimpleGrid column={5} spacing={5} justifyItems="center">
           <Box borderRadius="30px" mt="2em" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
+          <Center>
             <HStack>
+            <Img maxW="100px" maxH="100px" p="1em" src="/logo.png" />
+            <Heading fontSize={{base: "xl", md: "3xl"}} color="gray.500" p={{base: 0, md: 5}}>CakeStax CAKE Minter</Heading>
             <Img maxW="100px" maxH="100px" p="1em" src="/cake.png" />
-            <Heading color="gray.500" p={5}>CakeStax CAKE Minter</Heading>
-            
             </HStack>
+          </Center>
+          <Center>
+            <HStack>
+            <Text color="gray.500" fontSize={{base: "xl", md: "2xl"}} p={1}>{cakeBal.data} Total CAKE being baked.</Text>
+            </HStack>
+          </Center>
             <Center>
             <HStack pb={5}>
             <Badge ml="1" fontSize="1em" colorScheme="green">3% DAILY</Badge>
@@ -130,25 +140,25 @@ function Home() {
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
-              <Text color="gray.500" p={1}>2. Enter CAKE Amount Below and Hire Miners</Text>
+              <Text color="gray.500" p={1}>2. Exchange CAKE To Hire Bunnies. Bunnies bake more CAKE!</Text>
               <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of CAKE" />
               <HStack>
               <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
               <Text color="gray.500" p={1}>available CAKE</Text>
               </HStack>
-              <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Miners</Button>
+              <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Bunnies</Button>
             </VStack>
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Miners</Text>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Bunnies</Text>
               {/* <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{FPS.data} Feet Per Second</Text> */}
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Mined CAKE</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">You will be full on {date.data}</Text>
-              <HStack>
-            <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Miners</Button>
-            <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket CAKE</Button>
-            </HStack>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Baked CAKE</Text>
+              <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your CAKE will befully baked on<br/> {date.data}</Text>
+            <SimpleGrid columns={{base:1, md:2}} spacing={3}>
+            <Button onClick={() => compoundCAKE()} colorScheme="blue">Hire More Bunnies</Button>
+            <Button onClick={() => sellCAKE()} colorScheme="blue">Pocket Baked CAKE</Button>
+            </SimpleGrid>
             </VStack>
     
           </Center>
