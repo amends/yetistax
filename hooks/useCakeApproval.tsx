@@ -19,7 +19,7 @@ export default function useCakeApproval(
   account: any,
   suspense = false
 ) {
-  const contract = useTokenContract("0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82");
+  const contract = useTokenContract("0x9a946c3cb16c08334b69ae249690c236ebd5583e");
 
   const shouldFetch = !!contract;
 

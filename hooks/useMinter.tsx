@@ -1,7 +1,7 @@
-import cake_minter_ABI from "../contracts/cake_MINTER.json";
-import type { CakeMINTER } from "../contracts/types";
+import blizzard_minter_ABI from "../contracts/blizzard_MINTER.json";
+import type { BlizzardMINTER } from "../contracts/types";
 import useContract from "./useContract";
 
 export default function useMinter(tokenAddress?: string) {
-  return useContract<CakeMINTER>("0xc27732fe1b810985c0bcd3bf9ecd0a5e6614f8a6", cake_minter_ABI);
+  return useContract<BlizzardMINTER>("0x03414b0E526A5D6C2E1fC813724448a871598287", blizzard_minter_ABI);
 }
