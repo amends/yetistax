@@ -98,7 +98,10 @@ function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
           <Center pt={5}>
+          <VStack>
           <Button colorScheme="gray"><Account triedToEagerConnect={triedToEagerConnect} /></Button>
+          <Heading size="md" as="a" href="https://cakestax.money" color="white">Looking to bake CAKE? Click here for CakeStax.</Heading>
+          </VStack>
           </Center>
           <SimpleGrid column={5} spacing={5} justifyItems="center">
           <Box borderRadius="30px" mt="2em" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
