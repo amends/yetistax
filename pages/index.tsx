@@ -45,10 +45,11 @@ function Home() {
   const router = useRouter()
   const myMiners = useMyMiners(account)
   const FPS = useFPS(account)
-  const BAL = useBAL(account)
+  const preFeeBAL = useBAL(account)
   const date = useCountdown(account)
   const isCakeApproved = useCakeApproval("0x03414b0E526A5D6C2E1fC813724448a871598287", account);
   const cakeBal = useCakeBaking();
+  const BAL = (Number(preFeeBAL.data) * 0.95).toFixed(2)
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.href;
@@ -163,7 +164,7 @@ function Home() {
           <VStack p={5}>
               {isConnected ? <>
               <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{myMiners.data} Hired Yetis</Text>
-              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL.data} Chilled xBLZD</Text>
+              <Text color="gray.500" fontSize="2xl" fontWeight="semibold">{BAL} Chilled xBLZD</Text>
               <Text color="gray.500" fontSize={{base:"lgs", md:"2xl"}} fontWeight="semibold">Your xBLZD will be fully chilled on:<br/> {date.data}</Text></> :
               <Spinner mb={3} color="blue.500" />
               }
