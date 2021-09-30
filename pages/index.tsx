@@ -131,7 +131,7 @@ function Home() {
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" p={1}>1. Enter xBLZD Amount Below and Approve Spend</Text>
-              <Input onChange={event => setCAKE(event.target.value)} value={CAKE} placeholder="Amount of CAKE" />
+              <Input onChange={event => setCAKE(event.target.value)} value={CAKE} placeholder="Amount of xBLZD" />
               <HStack>
               {isConnected ? <>
               <Button variant="link" onClick={(e) => setCAKE(balCAKE.data)}>{balCAKE.data}</Button>
@@ -148,7 +148,7 @@ function Home() {
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" p={1}>2. Exchange xBLZD To Hire Yetis. Yetis make more xBLZD!</Text>
-              <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of CAKE" />
+              <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of xBLZD" />
               <HStack>
               {isConnected ? <>
               <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
