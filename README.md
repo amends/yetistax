@@ -2,5 +2,5 @@
 
 ## Features
 
-- It mints CAKE cmon man
+- It mints xBLZD cmon man
 
