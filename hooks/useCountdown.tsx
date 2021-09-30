@@ -15,7 +15,7 @@ function getCountdown(contract: any, address: any) {
     const formattedDate = date.toLocaleString(); 
     return formattedDate;
     } else {
-    return "Wait, you haven't hired any bunnies!";
+    return "Wait, you haven't hired any yeti!";
     }
   };
 }
