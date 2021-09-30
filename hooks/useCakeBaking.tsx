@@ -7,7 +7,7 @@ import { parseBalance } from "../util";
 function getCakeBaking(contract: any) {
   return async (_: string, address: string) => {
     const bal = await contract.getBalance();
-    return parseBalance(bal, 18, 6)
+    return parseBalance(bal, 18, 0)
   };
 }
 
