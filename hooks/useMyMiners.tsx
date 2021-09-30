@@ -5,7 +5,7 @@ import useMinter from "./useMinter";
 
 function getMiners(contract: any, address: any) {
   return async (_: string, address: string) => {
-    const miners = await contract.cakeMiners(address);
+    const miners = await contract.blizzardMiners(address);
     return miners.toNumber();
   };
 }

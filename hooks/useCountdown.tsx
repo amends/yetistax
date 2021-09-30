@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 
 function getCountdown(contract: any, address: any) {
   return async (_: string, address: string) => {
-    const currentTime = await contract.cakeBake(address);
+    const currentTime = await contract.blizzardBake(address);
     if (currentTime != 0){
     const addTime = currentTime.toNumber() + 86400
     const ms = addTime * 1000
