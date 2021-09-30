@@ -100,7 +100,7 @@ function Home() {
           <Center pt={5}>
           <VStack>
           <Button colorScheme="gray"><Account triedToEagerConnect={triedToEagerConnect} /></Button>
-          <Heading size="md" as="a" href="https://cakestax.money" color="white">Looking to bake CAKE? Click here for CakeStax.</Heading>
+          <Heading px={10} size="md" as="a" href="https://cakestax.money" color="white">Looking to bake CAKE? Click here for CakeStax.</Heading>
           </VStack>
           </Center>
           <SimpleGrid column={5} spacing={5} justifyItems="center">
@@ -115,7 +115,7 @@ function Home() {
           <Center>
             <HStack>
               {isConnected ?<>
-            <Text color="gray.500" fontSize={{base: "xl", md: "2xl"}} p={1}>{cakeBal.data} Total xBLZD being chilled.</Text></> :
+            <Text color="gray.500" fontSize={{base: "md", md: "xl"}} p={3}>{cakeBal.data} Total xBLZD being chilled.</Text></> :
              <><Text color="gray.500" p={1}>Please Connect To MetaMask.</Text></>
               }
             </HStack>
