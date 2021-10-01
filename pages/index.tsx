@@ -31,6 +31,7 @@ import useBAL from "../hooks/useAvailBalance"
 import useCountdown from "../hooks/useCountdown";
 import useCakeApproval from "../hooks/useCakeApproval";
 import useCakeBaking from "../hooks/useCakeBaking";
+import usexBLZDPrice from "../hooks/usexBLZDPrice";
 var isLoading = false;
 function Home() {
   
@@ -50,6 +51,9 @@ function Home() {
   const isCakeApproved = useCakeApproval("0x03414b0E526A5D6C2E1fC813724448a871598287", account);
   const cakeBal = useCakeBaking();
   const BAL = (Number(preFeeBAL.data) * 0.95).toFixed(2)
+  const xBZLDPrice = usexBLZDPrice();
+  const TVL = (Number(xBZLDPrice.data) * Number(cakeBal.data)).toFixed(0)
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const hostname = window.location.href;
@@ -116,12 +120,13 @@ function Home() {
             </HStack>
           </Center>
           <Center>
-            <HStack>
+            <VStack>
               {isConnected ?<>
-            <Text color="gray.500" fontSize={{base: "md", md: "xl"}} p={3}>{cakeBal.data} Total xBLZD being chilled.</Text></> :
+            <Text color="gray.500" fontSize={{base: "md", md: "xl"}} px={3} py={1}>{cakeBal.data} Total xBLZD being chilled.</Text>
+            <Text color="gray.500" fontSize={{base: "md", md: "xl"}} px={3} py={2}>${TVL} Total Value Locked</Text></> :
              <><Text color="gray.500" p={1}>Please Connect To MetaMask.</Text></>
               }
-            </HStack>
+            </VStack>
           </Center>
             <Center>
             <HStack pb={5}>
