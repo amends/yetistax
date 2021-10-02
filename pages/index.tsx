@@ -32,6 +32,8 @@ import useCountdown from "../hooks/useCountdown";
 import useCakeApproval from "../hooks/useCakeApproval";
 import useCakeBaking from "../hooks/useCakeBaking";
 import usexBLZDPrice from "../hooks/usexBLZDPrice";
+import { FaTwitter, FaTelegram } from "react-icons/fa"
+
 var isLoading = false;
 function Home() {
   
@@ -128,11 +130,17 @@ function Home() {
               }
             </VStack>
           </Center>
-            <Center>
+          <Center>
+            <VStack>
             <HStack pb={5}>
             <Badge ml="1" fontSize="1em" colorScheme="green">3% DAILY</Badge>
             <Badge ml="1" fontSize="1em" colorScheme="green">1,095% APR</Badge>
             </HStack>
+            <HStack pb={5}>
+            <Button as="a" href="https://twitter.com/cake_stax" colorScheme="twitter" leftIcon={<FaTwitter />}>Twitter</Button>
+            <Button as="a" href="https://t.me/CakeStax" colorScheme="telegram" leftIcon={<FaTelegram />}>Telegram</Button>
+            </HStack>
+            </VStack>
             </Center>
           </Box>
         
