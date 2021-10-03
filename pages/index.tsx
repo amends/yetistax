@@ -41,6 +41,7 @@ function Home() {
   const triedToEagerConnect = useEagerConnect();
   const [CAKE, setCAKE] = useState('');
   const [miners, setMiners] = useState('');
+  const [chillers, setChillers] = useState('0')
   const balCAKE = useTokenBalance(account, "0x9a946c3cb16c08334b69ae249690c236ebd5583e")
   const cakeContract = useTokenContract("0x9a946c3cb16c08334b69ae249690c236ebd5583e")
   const miner = useMinter()
@@ -55,6 +56,29 @@ function Home() {
   const BAL = (Number(preFeeBAL.data) * 0.95).toFixed(2)
   const xBZLDPrice = usexBLZDPrice();
   const TVL = (Number(xBZLDPrice.data) * Number(cakeBal.data)).toFixed(0)
+
+  const asyncSetMiners = async (event) => {
+    setMiners(event)
+  }
+  const asyncSetChillers = async (value) => {
+    setChillers(value)
+  }
+
+  async function onMinerFieldChange(event: any){
+    await asyncSetMiners(event)
+    await getEstimatedMiners(event).then(result =>
+      asyncSetChillers(result))
+  }
+
+    const getEstimatedMiners = async(event) => {
+    if(Number(event) > 0){
+    const estimatedBuy = await miner.calculateBlizzardBuySimple(ethers.utils.parseEther(event));
+    const hatch = await miner.BLIZZARD_TO_BAKE_MINERS();
+    const estimatedMiners = ((Number(estimatedBuy) / Number(hatch) * .95).toFixed(0))
+    return estimatedMiners
+    }
+    return "0";
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -164,7 +188,7 @@ function Home() {
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
           <VStack p={5}>
               <Text color="gray.500" p={1}>2. Exchange xBLZD To Hire Yetis. Yetis make more xBLZD!</Text>
-              <Input onChange={event => setMiners(event.target.value)} value={miners} placeholder="Amount of xBLZD" />
+              <Input onChange={event => onMinerFieldChange(event.target.value)} value={miners} placeholder="Amount of xBLZD" />
               <HStack>
               {isConnected ? <>
               <Button variant="link" onClick={(e) => setMiners(balCAKE.data)}>{balCAKE.data}</Button>
@@ -172,7 +196,7 @@ function Home() {
               <Spinner mb={3} color="blue.500" />
               }
               </HStack>
-              <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire Yetis</Button>
+              <Button onClick={() => investCAKE(ethers.utils.parseEther(miners))} colorScheme="blue">Hire {chillers} Yetis</Button>
             </VStack>
           </Center>
           <Center borderRadius="30px" boxShadow="lg" bg="white" alignItems="center" width={{base: "90vw", md: "40vw"}}>
