@@ -122,7 +122,7 @@ function Home() {
   }
 
   return (
-    <Box bg="blue.500" minW="100vw" minH="100vh">
+    <Box bg="blue.500" >
     <>
       <Head>
         <title>YetiStax xBLZD Minting</title>
