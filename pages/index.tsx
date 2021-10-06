@@ -53,7 +53,7 @@ function Home() {
   const date = useCountdown(account)
   const isCakeApproved = useCakeApproval("0x03414b0E526A5D6C2E1fC813724448a871598287", account);
   const cakeBal = useCakeBaking();
-  const BAL = checkBal(cakeBal)
+  const BAL = checkBal(preFeeBAL)
   const xBZLDPrice = usexBLZDPrice();
   const TVL = (Number(xBZLDPrice.data) * Number(cakeBal.data)).toFixed(0)
 
